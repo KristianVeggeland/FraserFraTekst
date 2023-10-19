@@ -16,6 +16,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
+/**
+ * En JavaFX applikasjon for å analysere og generere tekst basert på tre ords kombinasjoner.
+ * Tekst leses inn, tre ords kombinasjoner identifiseres, og ny tekst genereres basert på disse mønstrene.
+ * Brukeren kan spesifisere to startord, og applikasjonen genererer tekst ved å velge etterfølgende ord
+ * basert på analysert sannsynlighet. Teksten kan også lagres til en fil.
+ *
+ * @author Kristian Veggeland
+ * @author Christian Ledaal
+ */
 public class SvadaApplikasjon extends Application {
     private String lagringsBuffer = "";
     private final TextProcessor processor = new TextProcessor();
@@ -23,6 +32,11 @@ public class SvadaApplikasjon extends Application {
     private final TextField inputText = new TextField();
     private final TextField inputAmount = new TextField();
 
+    /**
+     * Starter JavaFX applikasjonen.
+     *
+     * @param primaryStage Hovedscenen for denne applikasjonen.
+     */
     @Override
     public void start(Stage primaryStage) {
         Button loadButton = new Button("Last Inn Tekst");
@@ -53,6 +67,9 @@ public class SvadaApplikasjon extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Laster inn tekst fra en fil og prosesser den.
+     */
     private void loadText() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(null);
@@ -67,6 +84,9 @@ public class SvadaApplikasjon extends Application {
         }
     }
 
+    /**
+     * Genererer tekst basert på gitt input og viser den i textArea.
+     */
     private void generateText() {
         String generatedText = processor.generateText(inputText.getText(), Integer.parseInt(inputAmount.getText()));
         //System.out.println("AAAAAAAA " + Integer.parseInt(inputAmount.getText()));
@@ -74,6 +94,9 @@ public class SvadaApplikasjon extends Application {
         textArea.setText(generatedText);
     }
 
+    /**
+     * Lagrer generert tekst til en fil.
+     */
     private void saveText() {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showSaveDialog(null);
@@ -87,6 +110,11 @@ public class SvadaApplikasjon extends Application {
         }
     }
 
+    /**
+     * Hovedmetoden for applikasjonen.
+     *
+     * @param args Kommandolinjeargumenter.
+     */
     public static void main(String[] args) {
         launch(args);
     }
