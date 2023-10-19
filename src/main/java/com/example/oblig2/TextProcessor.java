@@ -16,7 +16,7 @@ public class TextProcessor {
     private final Map<String, Map<String, Integer>> data = new HashMap<>();
 
     // Mønster for å identifisere ord og tegnsetting.
-    private final Pattern pattern = Pattern.compile("\\b\\w+\\b|[,;:\\.]", Pattern.UNICODE_CHARACTER_CLASS);
+    private final Pattern pattern = Pattern.compile("\\b\\w+\\b|[,;:.]", Pattern.UNICODE_CHARACTER_CLASS);
 
     /**
      * Analyserer gitt tekst og bygger opp datastrukturen.
@@ -56,9 +56,7 @@ public class TextProcessor {
     public void printDataMap() {
         data.forEach((key, valueMap) -> {
             System.out.println("Key: " + key);
-            valueMap.forEach((value, count) -> {
-                System.out.println("  " + value + ": " + count);
-            });
+            valueMap.forEach((value, count) -> System.out.println("  " + value + ": " + count));
         });
     }
 
