@@ -5,10 +5,24 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * En klasse for å prosessere og generere tekst basert på gitt input.
+ * @author Kristian Veggeland
+ * @author Christian Ledaal
+ */
 public class TextProcessor {
-    private final Map<String, Map<String, Integer>> data = new HashMap<>();
-    private final Pattern pattern = Pattern.compile("\\b\\w+\\b|[,;:\\.]", Pattern.UNICODE_CHARACTER_CLASS);
 
+    // Datastruktur for å lagre ordkombinasjoner og antall
+    private final Map<String, Map<String, Integer>> data = new HashMap<>();
+
+    // Mønster for å identifisere ord og tegnsetting.
+    private final Pattern pattern = Pattern.compile("\\b\\w+\\b|[,;:.]", Pattern.UNICODE_CHARACTER_CLASS);
+
+    /**
+     * Analyserer gitt tekst og bygger opp datastrukturen.
+     *
+     * @param text Teksten som skal prosesseres.
+     */
     public void processText(String text) {
         data.clear();
 
@@ -36,15 +50,23 @@ public class TextProcessor {
         printDataMap();
     }
 
+    /**
+     * Skriver ut datastrukturen til konsollen.
+     */
     public void printDataMap() {
         data.forEach((key, valueMap) -> {
             System.out.println("Key: " + key);
-            valueMap.forEach((value, count) -> {
-                System.out.println("  " + value + ": " + count);
-            });
+            valueMap.forEach((value, count) -> System.out.println("  " + value + ": " + count));
         });
     }
 
+    /**
+     * Genererer tekst basert på gitt startord og antall ord.
+     *
+     * @param startWords Startordene for teksten.
+     * @param wordCount Antall ord som skal genereres.
+     * @return Den genererte teksten.
+     */
     public String generateText(String startWords, int wordCount) {
         StringBuilder result = new StringBuilder(startWords.replace("+", " "));
         Random random = new Random();
